@@ -83,21 +83,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1",
       },
       { name: "theme-color", content: "#fbfaf7" },
-      { title: "TinyHabit — Daily habit tracker" },
+      { title: "Today · TinyHabit" },
       {
         name: "description",
         content:
-          "TinyHabit is a calm, mobile-first daily habit tracker. Track up to five habits, keep your streak alive, and watch your consistency grow.",
+          "Your daily habit check-in. Tap a habit to mark it done and keep your streak going.",
       },
       { name: "author", content: "TinyHabit" },
-      { property: "og:title", content: "TinyHabit — Daily habit tracker" },
+      { property: "og:title", content: "Today · TinyHabit" },
       {
         property: "og:description",
         content:
-          "Track up to five habits, build streaks, and watch your consistency grow — all stored on your device.",
+          "Your daily habit check-in. Tap a habit to mark it done and keep your streak going.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Today · TinyHabit" },
+      { name: "twitter:description", content: "Your daily habit check-in. Tap a habit to mark it done and keep your streak going." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fa99acdd-c613-4ee0-a698-de84818f09ca/id-preview-d461417a--56a43a34-bdd4-4818-aecf-cddcec4ac73e.lovable.app-1784963841279.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fa99acdd-c613-4ee0-a698-de84818f09ca/id-preview-d461417a--56a43a34-bdd4-4818-aecf-cddcec4ac73e.lovable.app-1784963841279.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

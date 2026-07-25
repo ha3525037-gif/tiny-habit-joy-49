@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Today · TinyHabit" },
       {
         property: "og:description",
-        content: "Tap to complete today's habits and watch your streaks grow.",
+        content: "Your daily habit check-in. Tap a habit to mark it done and keep your streak going.",
       },
     ],
   }),
