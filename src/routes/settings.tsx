@@ -283,3 +283,80 @@ function HabitSheet({
     </div>
   );
 }
+
+function ReminderSection() {
+  const { settings, update } = useReminderSettings();
+  const [perm, setPerm] = useState<NotificationPermission>("default");
+
+  useEffect(() => {
+    if (typeof Notification !== "undefined") setPerm(Notification.permission);
+  }, []);
+
+  const toggleEnabled = async () => {
+    if (!settings.enabled) {
+      const p = await requestNotificationPermission();
+      setPerm(p);
+      if (p === "granted") update({ enabled: true });
+    } else {
+      update({ enabled: false });
+    }
+  };
+
+  return (
+    <section className="animate-entry mb-6">
+      <h2 className="mb-3 font-mono text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
+        Reminders
+      </h2>
+      <div className="space-y-2">
+        <button
+          onClick={toggleEnabled}
+          className="flex w-full items-center justify-between rounded-3xl border border-border bg-card p-4 active:scale-[0.99] transition"
+        >
+          <div className="flex items-center gap-3">
+            <div className="grid size-11 place-items-center rounded-2xl bg-surface">
+              <Bell className="size-5 text-accent" />
+            </div>
+            <div className="text-left">
+              <p className="text-sm font-semibold">Smart nudges</p>
+              <p className="text-xs text-muted-foreground">
+                {settings.enabled
+                  ? "One combined nudge, never spam"
+                  : perm === "denied"
+                    ? "Blocked in browser settings"
+                    : "Off"}
+              </p>
+            </div>
+          </div>
+          <div
+            className={cn(
+              "relative h-6 w-11 rounded-full transition-colors",
+              settings.enabled ? "bg-accent" : "bg-surface-2",
+            )}
+          >
+            <div
+              className={cn(
+                "absolute top-0.5 size-5 rounded-full bg-white shadow transition-transform",
+                settings.enabled ? "translate-x-5" : "translate-x-0.5",
+              )}
+            />
+          </div>
+        </button>
+
+        <div className="flex items-center justify-between rounded-3xl border border-border bg-card p-4">
+          <div>
+            <p className="text-sm font-semibold">Daily habit check-in</p>
+            <p className="text-xs text-muted-foreground">
+              Nudged if habits are still open
+            </p>
+          </div>
+          <input
+            type="time"
+            value={settings.time}
+            onChange={(e) => update({ time: e.target.value })}
+            className="rounded-2xl bg-surface px-3 py-2 font-mono text-sm font-medium outline-none"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
