@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowDown, ArrowUp, Moon, Pencil, Plus, Sun, Trash2, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowDown, ArrowUp, Bell, Moon, Pencil, Plus, Sun, Trash2, X } from "lucide-react";
 import { useHabits } from "@/hooks/use-habits";
 import { useTheme } from "@/hooks/use-theme";
+import {
+  requestNotificationPermission,
+  useReminderSettings,
+} from "@/hooks/use-reminder";
 import { MAX_HABITS, type Habit } from "@/lib/habits";
 import { cn } from "@/lib/utils";
 
