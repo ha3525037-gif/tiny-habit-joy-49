@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import { BottomNav } from "./bottom-nav";
+import { useReminder } from "@/hooks/use-reminder";
 
 export function AppShell({ children }: { children: ReactNode }) {
+  useReminder();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div
