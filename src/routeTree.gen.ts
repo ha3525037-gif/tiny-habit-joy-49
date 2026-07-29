@@ -9,10 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TodosRouteImport } from './routes/todos'
+import { Route as TimetableRouteImport } from './routes/timetable'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as HeatmapRouteImport } from './routes/heatmap'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TodosRoute = TodosRouteImport.update({
+  id: '/todos',
+  path: '/todos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimetableRoute = TimetableRouteImport.update({
+  id: '/timetable',
+  path: '/timetable',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -33,34 +45,56 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/heatmap': typeof HeatmapRoute
   '/settings': typeof SettingsRoute
+  '/timetable': typeof TimetableRoute
+  '/todos': typeof TodosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/heatmap': typeof HeatmapRoute
   '/settings': typeof SettingsRoute
+  '/timetable': typeof TimetableRoute
+  '/todos': typeof TodosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/heatmap': typeof HeatmapRoute
   '/settings': typeof SettingsRoute
+  '/timetable': typeof TimetableRoute
+  '/todos': typeof TodosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/heatmap' | '/settings'
+  fullPaths: '/' | '/heatmap' | '/settings' | '/timetable' | '/todos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/heatmap' | '/settings'
-  id: '__root__' | '/' | '/heatmap' | '/settings'
+  to: '/' | '/heatmap' | '/settings' | '/timetable' | '/todos'
+  id: '__root__' | '/' | '/heatmap' | '/settings' | '/timetable' | '/todos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HeatmapRoute: typeof HeatmapRoute
   SettingsRoute: typeof SettingsRoute
+  TimetableRoute: typeof TimetableRoute
+  TodosRoute: typeof TodosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/todos': {
+      id: '/todos'
+      path: '/todos'
+      fullPath: '/todos'
+      preLoaderRoute: typeof TodosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timetable': {
+      id: '/timetable'
+      path: '/timetable'
+      fullPath: '/timetable'
+      preLoaderRoute: typeof TimetableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -89,6 +123,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HeatmapRoute: HeatmapRoute,
   SettingsRoute: SettingsRoute,
+  TimetableRoute: TimetableRoute,
+  TodosRoute: TodosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
