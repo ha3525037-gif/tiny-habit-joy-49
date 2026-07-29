@@ -117,6 +117,8 @@ function SettingsPage() {
         </div>
       </section>
 
+      <ReminderSection />
+
       <section className="animate-entry">
         <h2 className="mb-3 font-mono text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
           Appearance
